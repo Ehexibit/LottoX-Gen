@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/boardConstraint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#95F699">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="243dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="180dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/generateButton"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/option_button"
+        android:text="@string/generate_button"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#7CB342"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageDraw"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bg42" />
+
+    <Button
+        android:id="@+id/optionButton"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="124dp"
+        android:background="@drawable/option_button"
+        android:ellipsize="middle"
+        android:text="@string/option_button"
+        app:circularflow_defaultRadius="5dp"
+        app:circularflow_radiusInDP="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/generateButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/boardBalls1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="56dp"
+        android:background="@drawable/bg42"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageDraw" />
+
+    <TextView
+        android:id="@+id/boardBalls2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg42"
+        app:layout_constraintStart_toEndOf="@+id/boardBalls1"
+        app:layout_constraintTop_toBottomOf="@+id/imageDraw" />
+
+    <TextView
+        android:id="@+id/boardBalls3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg42"
+        app:layout_constraintStart_toEndOf="@+id/boardBalls2"
+        app:layout_constraintTop_toBottomOf="@+id/imageDraw" />
+
+    <TextView
+        android:id="@+id/boardBalls4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg42"
+        app:layout_constraintStart_toEndOf="@+id/boardBalls3"
+        app:layout_constraintTop_toBottomOf="@+id/imageDraw" />
+
+    <TextView
+        android:id="@+id/boardBalls5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg42"
+        app:layout_constraintStart_toEndOf="@+id/boardBalls4"
+        app:layout_constraintTop_toBottomOf="@+id/imageDraw" />
+
+    <TextView
+        android:id="@+id/boardBalls6"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg42"
+        app:layout_constraintStart_toEndOf="@+id/boardBalls5"
+        app:layout_constraintTop_toBottomOf="@+id/imageDraw" />
+</androidx.constraintlayout.widget.ConstraintLayout>
