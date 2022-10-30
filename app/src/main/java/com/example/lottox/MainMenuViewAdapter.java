@@ -7,6 +7,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -108,7 +109,7 @@ public class MainMenuViewAdapter extends RecyclerView.Adapter<MainMenuViewAdapte
 
         }
         holder.image.setOnClickListener(view -> {
-
+            Toast.makeText(view.getContext(),"Title Click!",Toast.LENGTH_SHORT).show();
 
             transaction = fragmentManager.beginTransaction();
 
@@ -118,7 +119,6 @@ public class MainMenuViewAdapter extends RecyclerView.Adapter<MainMenuViewAdapte
                 transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 transaction.addToBackStack(null);
                 transaction.commit();
-
                 factory.setDraw(menuList.get(position).draw);
 
             }
