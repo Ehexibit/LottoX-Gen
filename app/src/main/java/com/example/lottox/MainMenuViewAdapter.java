@@ -109,7 +109,7 @@ public class MainMenuViewAdapter extends RecyclerView.Adapter<MainMenuViewAdapte
 
         }
         holder.image.setOnClickListener(view -> {
-            Toast.makeText(view.getContext(),"Title Click!",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(view.getContext(),"Title Click!",Toast.LENGTH_SHORT).show();
 
             transaction = fragmentManager.beginTransaction();
 
