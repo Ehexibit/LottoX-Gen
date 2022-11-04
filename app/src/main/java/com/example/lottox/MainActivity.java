@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity{
         factory = LottoFactory.getInstance();
         fragmentManager = getSupportFragmentManager();
 
-        new Thread(() -> factory.init()).start();
+        new Thread(() -> factory.init(this)).start();
 
 
         initializeMenu(); //Initialize and Instantiate MainMenu Objects

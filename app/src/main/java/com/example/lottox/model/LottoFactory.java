@@ -1,7 +1,14 @@
 package com.example.lottox.model;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
+import com.example.lottox.MainActivity;
+
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 public class LottoFactory implements Serializable {
 	
@@ -55,7 +62,7 @@ public class LottoFactory implements Serializable {
 	
 	}//End getInstance
 	
-	public void init(){
+	public void init(Context context){
 
 		Log.d("Init Factory","Factory initialize");
 //Create ArrayList of LottoNumber Object and LottoNumber Object added to it.	
@@ -107,7 +114,8 @@ public class LottoFactory implements Serializable {
 			a.setNumbers(lottoNumber);
 			lottoNumber[i-1] = a;
 		}
-		loadResult();
+		Log.d("Load File","File Loading!");
+		loadResult(context);
 	}//End void  init
 	
 	public void reset(){
@@ -230,14 +238,75 @@ public class LottoFactory implements Serializable {
 	public Lotto getDrawState(){
 		return drawState;
 	}
-	private void loadResult(){
+	private void loadResult(Context context){
 		Log.d("Load JSON: ","Loading!");
-		ResourceManager.loadDataBase(ultraResult, Lotto.ULTRA);
-		ResourceManager.loadDataBase(grandResult, Lotto.GRAND);
-		ResourceManager.loadDataBase(superResult, Lotto.SUPER);
-		ResourceManager.loadDataBase(megaResult, Lotto.MEGA);
-		ResourceManager.loadDataBase(lottoResult, Lotto.LOTTO);
-		Log.d("Load JSON: ", "Successful");
+
+		//SharedPref AppData
+		//InitialState = true; else false;
+		//lastUpdate = "Date";
+		//
+		LocalDate currentDate = LocalDate.now(); //Get Current Date
+		LocalDate lastUpdate = LocalDate.now(); //Default
+		SharedPreferences sharedPreferences = context.getSharedPreferences("AppUpdate",Context.MODE_PRIVATE);
+		boolean initialState = sharedPreferences.getBoolean("InitialState",true);
+		String sts = ""+currentDate.toString()+initialState+lastUpdate.toString();
+		Log.d("Status",sts);
+		if(initialState){
+			//updateOnline and set last update
+			update(context);
+			sharedPreferences.edit().putBoolean("InitialState", false).apply(); //save state
+		}
+		else{
+			lastUpdate = LocalDate.parse(sharedPreferences.getString("LastUpdate",LocalDate.now().toString())); //get state
+		}
+
+		if (lastUpdate.compareTo(currentDate)==0){
+			//load local data base
+
+			ResourceManager.load(context,ultraResult,Lotto.ULTRA);
+			ResourceManager.load(context,grandResult,Lotto.GRAND);
+			ResourceManager.load(context,superResult,Lotto.SUPER);
+			ResourceManager.load(context,megaResult,Lotto.MEGA);
+			ResourceManager.load(context,lottoResult,Lotto.LOTTO);
+
+
+		}
+		else if(isNetWorkAvailable(context)){
+			//load online data base
+			update(context);
+			ResourceManager.load(context,ultraResult,Lotto.ULTRA);
+			ResourceManager.load(context,grandResult,Lotto.GRAND);
+			ResourceManager.load(context,superResult,Lotto.SUPER);
+			ResourceManager.load(context,megaResult,Lotto.MEGA);
+			ResourceManager.load(context,lottoResult,Lotto.LOTTO);
+			Log.d("Load JSON: ", "Successful");
+			lastUpdate = LocalDate.now();
+			sharedPreferences.edit().putString("LastUpdate",lastUpdate.toString()).apply();
+		}
+		else{
+
+			ResourceManager.load(context,ultraResult,Lotto.ULTRA);
+			ResourceManager.load(context,grandResult,Lotto.GRAND);
+			ResourceManager.load(context,superResult,Lotto.SUPER);
+			ResourceManager.load(context,megaResult,Lotto.MEGA);
+			ResourceManager.load(context,lottoResult,Lotto.LOTTO);
+		}
+
+
+
+	}
+	private static void update(Context context){
+		ResourceManager.updateFile(context,Lotto.ULTRA);
+		ResourceManager.updateFile(context,Lotto.GRAND);
+		ResourceManager.updateFile(context,Lotto.SUPER);
+		ResourceManager.updateFile(context,Lotto.MEGA);
+		ResourceManager.updateFile(context,Lotto.LOTTO);
+
+	}
+	private static boolean isNetWorkAvailable(Context context){
+		ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+		return networkInfo != null && networkInfo.isConnected();
 	}
 
 	
