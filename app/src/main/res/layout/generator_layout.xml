@@ -15,7 +15,7 @@
         android:clickable="true"
         android:focusable="true">
 
-        <com.example.lottox.GridRecyclerView
+        <com.ehexibit.lottox.GridRecyclerView
             android:id="@+id/ballsRecycler"
             android:layout_width="wrap_content"
             android:layout_height="315dp"
@@ -132,7 +132,7 @@
             app:layout_constraintStart_toEndOf="@+id/boardBalls5"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.example.lottox.GridRecyclerView
+        <com.ehexibit.lottox.GridRecyclerView
             android:id="@+id/resultRecyclerView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
